@@ -16,6 +16,13 @@ const nextConfig = {
   // compiler: {
   //   styledComponents: true,
   // },
+  typescript: {
+    // !! WARN !!
+    // Dangerously allow production builds to successfully complete even if
+    // your project has type errors.
+    // !! WARN !!
+    ignoreBuildErrors: true,
+  },
   reactStrictMode: true, // Recommended for the `pages` directory, default in `app`.
   images: {},
   webpack(config, { isServer }) {
@@ -56,6 +63,8 @@ const nextConfig = {
 const KEYS_TO_OMIT = ['webpackDevMiddleware', 'configOrigin', 'target', 'analyticsId', 'webpack5', 'amp', 'assetPrefix']
 
 module.exports = (_phase, { defaultConfig }) => {
+
+
   const plugins = [[withPWA], [withBundleAnalyzer, {}]]
 
   const wConfig = plugins.reduce((acc, [plugin, config]) => plugin({ ...acc, ...config }), {

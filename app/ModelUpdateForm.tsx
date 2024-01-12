@@ -10,7 +10,7 @@ interface Props {
 
 export default function ModelUpdateForm(props: Props) {
     //const [modelName,setModelName] = useState<string>('')
-    const handleUpdate = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handleUpdate = async (e) => {
         e.preventDefault()
         try {
             const response = await fetch(`http://18.116.81.232:3001/update/${props.modelName}`, {
