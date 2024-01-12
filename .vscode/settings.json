@@ -5,5 +5,14 @@
     "source.fixAll": "explicit"
   },
   "eslint.validate": ["javascript"],
-  "eslint.workingDirectories": [{ "mode": "auto" }]
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#13341E",
+    "titleBar.activeBackground": "#1B482B",
+    "titleBar.activeForeground": "#F7FCF9"
+  }
 }

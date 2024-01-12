@@ -30,6 +30,7 @@ const Layout = ({ children }) => {
         }}
         eventSource={ref}
         eventPrefix='client'
+        shadows
       />
     </div>
   )

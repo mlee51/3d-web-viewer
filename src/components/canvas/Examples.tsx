@@ -3,13 +3,13 @@
 import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
-import { useMemo, useRef, useState } from 'react'
+import { useMemo, useRef, useState, useLayoutEffect } from 'react'
 import { Line, useCursor, MeshDistortMaterial } from '@react-three/drei'
 import { useRouter } from 'next/navigation'
 
 export const Blob = ({ route = '/', ...props }) => {
   const router = useRouter()
-  const [hovered, hover] = useState(false)
+  const [hovered, hover] = useState<boolean>(false)
   useCursor(hovered)
   return (
     <mesh
@@ -27,7 +27,7 @@ export const Logo = ({ route = '/blob', ...props }) => {
   const mesh = useRef(null)
   const router = useRouter()
 
-  const [hovered, hover] = useState(false)
+  const [hovered, hover] = useState<boolean>(false)
   const points = useMemo(() => new THREE.EllipseCurve(0, 0, 3, 1.15, 0, 2 * Math.PI, false, 0).getPoints(100), [])
 
   useCursor(hovered)
