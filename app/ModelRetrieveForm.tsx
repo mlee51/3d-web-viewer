@@ -1,10 +1,11 @@
 // ModelRetrieveForm.js
 import React, { useState, useEffect, useMemo } from 'react';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader';
+import { GLTFLoader } from 'three-stdlib';
+
 import ModelViewer from './ModelViewer';
 
 
-const loader = new GLTFLoader();
+const loader = new GLTFLoader()
 
 function ModelRetrieveForm() {
     const [modelName, setModelName] = useState<string>('')
