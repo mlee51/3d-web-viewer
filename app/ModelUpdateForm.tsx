@@ -13,7 +13,7 @@ export default function ModelUpdateForm(props: Props) {
     const handleUpdate = async (e) => {
         e.preventDefault()
         try {
-            const response = await fetch(`http://18.116.81.232:3001/update/${props.modelName}`, {
+            const response = await fetch(`https://18.116.81.232:3001/update/${props.modelName}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
