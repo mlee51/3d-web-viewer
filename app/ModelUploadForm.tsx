@@ -41,7 +41,7 @@ const ModelUploadForm = () => {
             formData.append('model', modelFile);
             formData.append('name', modelName);
 
-            await fetch('http://18.116.81.232:3001/upload', {
+            await fetch('https://18.116.81.232/upload', {
                 method: 'POST',
                 body: formData,
             });

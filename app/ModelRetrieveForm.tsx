@@ -18,7 +18,7 @@ function ModelRetrieveForm() {
     useEffect(() => {
         const fetchModels = async () => {
             try {
-                const response = await fetch('https://18.116.81.232:3001/models')
+                const response = await fetch('https://18.116.81.232/models')
                 if (!response.ok) {
                     throw new Error(`Error fetching models: ${response.status} ${response.statusText}`)
                 }
@@ -51,7 +51,7 @@ function ModelRetrieveForm() {
         //e.preventDefault();
 
         try {
-            const response = await fetch(`https://18.116.81.232:3001/models/${modelName}`, {
+            const response = await fetch(`https://18.116.81.232/models/${modelName}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ function ModelRetrieveForm() {
 
     const getBackgroundColor = async () => {
         try {
-            const response = await fetch(`https://18.116.81.232:3001/background_color/${modelName}`, {
+            const response = await fetch(`https://18.116.81.232/background_color/${modelName}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
