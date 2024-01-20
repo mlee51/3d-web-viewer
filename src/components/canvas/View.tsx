@@ -2,6 +2,8 @@
 
 import { forwardRef, Suspense, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react'
 import { OrbitControls, PerspectiveCamera, View as ViewImpl } from '@react-three/drei'
+import * as THREE from 'three'
+import { Canvas } from '@react-three/fiber'
 import { Three } from '@/helpers/components/Three'
 import Effects from '@/components/canvas/Effects'
 import { useControls } from 'leva'
@@ -35,20 +37,16 @@ const View = forwardRef(({ children, orbit, colorHandler, backgroundColor, model
     <>
       <ModelUpdateForm modelName={modelName} backgroundColor={color} />
       <Colorpicker color={color} onChange={setColor} />
-
-      <div className='bottom-0 mb-10 left-1/2 -translate-x-1/2 z-10 fixed'>
-        <Fab onClick={() => setRotating(!rotating)}>
-          {rotating ? <PauseIcon /> : <PlayIcon />}
-        </Fab>
-      </div>
       <div ref={localRef} {...props} />
-      <Three>
+      <Canvas {...props}
+        onCreated={(state) => (state.gl.toneMapping = THREE.ACESFilmicToneMapping)}
+      >
         <ViewImpl track={localRef}>
           <Background color={color} />
           {children}
           {orbit && <OrbitControls makeDefault autoRotate={rotating} />}
         </ViewImpl>
-      </Three>
+      </Canvas>
     </>
   )
 })

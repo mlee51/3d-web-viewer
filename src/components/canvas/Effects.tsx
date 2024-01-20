@@ -8,13 +8,13 @@ export default function Effects() {
 
     return (
         <EffectComposer>
-            <DepthOfField focusDistance={0} focalLength={0.02} bokehScale={2} />
+            {/* <DepthOfField focusDistance={0} focalLength={0.02} bokehScale={2} /> */}
             {/* <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} /> */}
             <SSAO
                 blendFunction={BlendFunction.MULTIPLY} // Use NORMAL to see the effect
                 samples={31}
                 radius={35}
-                intensity={5}
+                intensity={7}
             />
         </EffectComposer>
     );

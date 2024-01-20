@@ -7,7 +7,7 @@ import ModelViewer from './ModelViewer';
 
 const loader = new GLTFLoader()
 
-function ModelRetrieveForm() {
+function ModelRetrieveForm({ handleFile, handleBackgroundColor, handleModelName, ...props }) {
     const [modelName, setModelName] = useState<string>('')
     const [modelData, setModelData] = useState(null)
     const [modelFile, setModelFile] = useState(null)
@@ -33,25 +33,24 @@ function ModelRetrieveForm() {
 
     useEffect(() => {
         // Trigger the submission when modelName changes
-        if (modelName !== '') {
-            handleSubmit()
+        if (props.modelName !== '') {
             getBackgroundColor()
         }
-    }, [modelName])
+    }, [props.modelName])
 
     useEffect(() => {
         console.log(backgroundColor)
     }, [backgroundColor])
 
     const handleNameChange = (e) => {
-        setModelName(e.target.value);
+        handleModelName(e.target.value);
     }
 
     const handleSubmit = async () => {
         //e.preventDefault();
 
         try {
-            const response = await fetch(`https://18.116.81.232/models/${modelName}`, {
+            const response = await fetch(`https://18.116.81.232/models/${props.modelName}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -72,7 +71,7 @@ function ModelRetrieveForm() {
                         //child.material.roughness = 0.1;
                         //child.material.metalness = 1;
                     }
-                    setModelFile(gltf.scene)
+                    handleFile(gltf.scene)
                 });
             });
         } catch (error) {
@@ -82,7 +81,7 @@ function ModelRetrieveForm() {
 
     const getBackgroundColor = async () => {
         try {
-            const response = await fetch(`https://18.116.81.232/background_color/${modelName}`, {
+            const response = await fetch(`https://18.116.81.232/background_color/${props.modelName}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -95,11 +94,13 @@ function ModelRetrieveForm() {
 
             const data = await response.json()
             const { background_color } = data;
-            if (background_color != null) setBackgroundColor(background_color)
+            if (background_color != null) handleBackgroundColor(background_color)//setBackgroundColor(background_color)
 
         }
         catch (error) {
             console.error(error.message)
+        } finally {
+            handleSubmit()
         }
     }
 
@@ -111,7 +112,7 @@ function ModelRetrieveForm() {
         <>
             <div className='fixed top-0 z-10'>
                 <form onSubmit={(e) => e.preventDefault()}>
-                    <select className='form-select box-content bg-inherit appearance-none outline-none m-4 text-4xl font-extrabold  tracking-tight' value={modelName || -1} onChange={handleNameChange}>
+                    <select className='form-select box-content bg-inherit appearance-none outline-none m-4 lg:text-4xl text-xl font-extrabold  tracking-tight' value={props.modelName || -1} onChange={handleNameChange}>
                         <option key={1} value={-1} className='hidden'>Select A Model ▼</option>
                         {availableModels.map((model) => (
                             <option className='p-4' key={model} value={model}>
@@ -121,7 +122,7 @@ function ModelRetrieveForm() {
                     </select>
                 </form>
             </div>
-            <ModelViewer modelName={modelName} backgroundColor={backgroundColor} setColor={handleBackgroundChange} modelFile={modelFile} />
+            {/* <ModelViewer modelName={modelName} backgroundColor={backgroundColor} setColor={handleBackgroundChange} modelFile={modelFile} /> */}
         </>
     );
 };
