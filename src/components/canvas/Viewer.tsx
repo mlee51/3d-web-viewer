@@ -1,18 +1,17 @@
-import { Canvas, invalidate } from '@react-three/fiber'
-import { OrbitControls, PerspectiveCamera, Stage, View } from '@react-three/drei'
-import { Suspense, useEffect, useRef, useState } from 'react'
-import Effects from '@/components/canvas/Effects'
+import { Canvas } from '@react-three/fiber'
+import { OrbitControls } from '@react-three/drei'
+import { useEffect, useState } from 'react'
 import * as THREE from 'three'
 import PauseButton from '@/PauseButton'
 import Colorpicker from '@/Colorpicker'
 
-export default function Viewer({ children, modelFile, autoRotate, initialColor }) {
+export default function Viewer({ children, initialColor }) {
     const [rotating, setRotating] = useState<boolean>(true)
     const [color, setColor] = useState<string>(initialColor)
     useEffect(() => {
         setColor(initialColor)
     }, [initialColor])
-    function handleRotation(e) {
+    function handleRotation() {
         setRotating(!rotating)
     }
     return (

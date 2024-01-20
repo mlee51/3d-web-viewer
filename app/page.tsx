@@ -2,8 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
-import { Canvas } from '@react-three/fiber'
-import { Stage, OrbitControls, Gltf } from '@react-three/drei'
+import { Stage } from '@react-three/drei'
 import ModelUploadForm from './ModelUploadForm'
 import ModelRetrieveForm from './ModelRetrieveForm'
 import '@fontsource/roboto/300.css';
@@ -11,16 +10,13 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import Viewer from '../src/components/canvas/Viewer'
-import Colorpicker from '@/Colorpicker'
 import { useState } from 'react'
 import ModelUpdateForm from './ModelUpdateForm'
-import PauseButton from './PauseButton'
 import Effects from '@/components/canvas/Effects'
 
 export default function Page() {
   const [modelFile, setModelFile] = useState(null)
   const [modelName, setModelName] = useState<string>('')
-  const [rotating, setRotating] = useState<boolean>(true)
   const [color, setColor] = useState<string>('white')
 
   function handleModelFile(e) {
@@ -35,10 +31,6 @@ export default function Page() {
     setModelName(e)
   }
 
-  function handleRotation(e) {
-    setRotating(!rotating)
-  }
-
   return (
     <>
       {/* <ModelUpdateForm modelName={modelName} backgroundColor={'white'} /> */}
@@ -48,7 +40,7 @@ export default function Page() {
         handleBackgroundColor={handleBackgroundColor}
         handleModelName={handleModelName}
         modelName={modelName} />
-      <Viewer modelFile={modelFile} initialColor={color} autoRotate={rotating}>
+      <Viewer initialColor={color}>
         <Suspense fallback={null}>
           <Effects />
         </Suspense>
@@ -65,7 +57,6 @@ export default function Page() {
           </Stage>
         </Suspense>
       </Viewer>
-
     </>
   )
 }

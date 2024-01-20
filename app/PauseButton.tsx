@@ -8,7 +8,7 @@ export default function PauseButton({ rotating, handleRotation }) {
 
     return (
         <div className='bottom-0 mb-10 left-1/2 -translate-x-1/2 z-10 fixed'>
-            <Fab onClick={handleRotation}>
+            <Fab style={{ backgroundColor: 'transparent' }} disableRipple disableFocusRipple disableTouchRipple onClick={handleRotation}>
                 {rotating ? <PauseIcon /> : <PlayIcon />}
             </Fab>
         </div>

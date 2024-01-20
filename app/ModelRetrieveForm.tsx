@@ -1,19 +1,11 @@
 // ModelRetrieveForm.js
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GLTFLoader } from 'three-stdlib';
-
-import ModelViewer from './ModelViewer';
-
 
 const loader = new GLTFLoader()
 
 function ModelRetrieveForm({ handleFile, handleBackgroundColor, handleModelName, ...props }) {
-    const [modelName, setModelName] = useState<string>('')
-    const [modelData, setModelData] = useState(null)
-    const [modelFile, setModelFile] = useState(null)
     const [availableModels, setAvailableModels] = useState([])
-    const [backgroundColor, setBackgroundColor] = useState<string>('#f0f0f0')
-
 
     useEffect(() => {
         const fetchModels = async () => {
@@ -38,17 +30,12 @@ function ModelRetrieveForm({ handleFile, handleBackgroundColor, handleModelName,
         }
     }, [props.modelName])
 
-    useEffect(() => {
-        console.log(backgroundColor)
-    }, [backgroundColor])
-
     const handleNameChange = (e) => {
         handleModelName(e.target.value);
     }
 
     const handleSubmit = async () => {
         //e.preventDefault();
-
         try {
             const response = await fetch(`https://18.116.81.232/models/${props.modelName}`, {
                 method: 'GET',
@@ -63,13 +50,12 @@ function ModelRetrieveForm({ handleFile, handleBackgroundColor, handleModelName,
 
             const data = await response.arrayBuffer()
             // Assuming the server returns the model data as an ArrayBuffer
-            setModelData(data);
             loader.parse(data, '', (gltf) => {
                 gltf.scene.traverse((child) => {
                     if (child.isMesh) {
                         child.castShadow = child.receiveShadow = true;
-                        //child.material.roughness = 0.1;
-                        //child.material.metalness = 1;
+                        // child.material.roughness = 0.1;
+                        // child.material.metalness = 1;
                     }
                     handleFile(gltf.scene)
                 });
@@ -104,10 +90,6 @@ function ModelRetrieveForm({ handleFile, handleBackgroundColor, handleModelName,
         }
     }
 
-    const handleBackgroundChange = (color) => {
-        setBackgroundColor(color)
-    }
-
     return (
         <>
             <div className='fixed top-0 z-10'>
@@ -122,7 +104,6 @@ function ModelRetrieveForm({ handleFile, handleBackgroundColor, handleModelName,
                     </select>
                 </form>
             </div>
-            {/* <ModelViewer modelName={modelName} backgroundColor={backgroundColor} setColor={handleBackgroundChange} modelFile={modelFile} /> */}
         </>
     );
 };
