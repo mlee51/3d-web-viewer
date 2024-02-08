@@ -33,7 +33,7 @@ export default function ModelUpdateForm(props: Props) {
     return (
         <div className='fixed z-10 m-4 bottom-0 p-8'>
 
-            <Fab component="span" variant="extended" aria-label="upload" onClick={(e) => handleUpdate(e)}>
+            <Fab className="bg-transparent" component="span" variant="extended" aria-label="upload" onClick={(e) => handleUpdate(e)}>
                 <SaveIcon />
             </Fab>
 

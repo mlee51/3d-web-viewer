@@ -14,7 +14,7 @@ import PlayIcon from '@mui/icons-material/PlayArrow';
 
 export const Common = () => (
   <Suspense fallback={null}>
-    <Effects />
+    {/* <Effects /> */}
   </Suspense>
 )
 
@@ -32,16 +32,14 @@ const View = forwardRef(({ children, orbit, colorHandler, backgroundColor, model
 
 
   return (
-    <>
+    <div ref={localRef} {...props}>
       <ModelUpdateForm modelName={modelName} backgroundColor={color} />
       <Colorpicker color={color} onChange={setColor} />
-
       <div className='bottom-0 mb-10 left-1/2 -translate-x-1/2 z-10 fixed'>
         <Fab onClick={() => setRotating(!rotating)}>
           {rotating ? <PauseIcon /> : <PlayIcon />}
         </Fab>
       </div>
-      <div ref={localRef} {...props} />
       <Three>
         <ViewImpl track={localRef}>
           <Background color={color} />
@@ -49,7 +47,7 @@ const View = forwardRef(({ children, orbit, colorHandler, backgroundColor, model
           {orbit && <OrbitControls makeDefault autoRotate={rotating} />}
         </ViewImpl>
       </Three>
-    </>
+    </div>
   )
 })
 View.displayName = 'View'
