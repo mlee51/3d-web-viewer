@@ -33,4 +33,6 @@ const Viewer = React.memo(({ children, initialColor }) => {
     )
 })
 
+Viewer.displayName = 'Viewer'
+
 export default Viewer

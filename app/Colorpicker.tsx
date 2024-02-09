@@ -22,4 +22,6 @@ const Colorpicker = React.memo(({ color, onChange }) => {
     )
 })
 
+Colorpicker.displayName = 'Colorpicker'
+
 export default Colorpicker

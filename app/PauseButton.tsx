@@ -15,4 +15,6 @@ const PauseButton = React.memo(({ rotating, handleRotation }) => {
     )
 })
 
+PauseButton.displayName = 'PauseButton'
+
 export default PauseButton
