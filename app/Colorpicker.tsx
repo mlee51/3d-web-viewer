@@ -1,3 +1,4 @@
+import React from 'react'
 import { HexColorPicker } from "react-colorful"
 import { useState, createContext } from 'react'
 import { Container } from '@mui/material'
@@ -6,7 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 export const ColorContext = createContext('')
 
-export default function Colorpicker({ color, onChange }) {
+const Colorpicker = React.memo(({ color, onChange }) => {
     const [active, setActive] = useState<boolean>(false)
 
     return (
@@ -19,5 +20,6 @@ export default function Colorpicker({ color, onChange }) {
             </ColorContext.Provider>
         </Container>
     )
-}
+})
 
+export default Colorpicker

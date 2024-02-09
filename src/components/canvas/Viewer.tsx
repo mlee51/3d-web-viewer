@@ -1,18 +1,20 @@
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import PauseButton from '@/PauseButton'
 import Colorpicker from '@/Colorpicker'
 
-export default function Viewer({ children, initialColor }) {
+const Viewer = React.memo(({ children, initialColor }) => {
     const [rotating, setRotating] = useState<boolean>(true)
     const [color, setColor] = useState<string>(initialColor)
     useEffect(() => {
         setColor(initialColor)
     }, [initialColor])
+
+
     function handleRotation() {
-        setRotating(!rotating)
+        setRotating((prev) => { return !prev })
     }
     return (
         <>
@@ -29,4 +31,6 @@ export default function Viewer({ children, initialColor }) {
             </div>
         </>
     )
-}
+})
+
+export default Viewer

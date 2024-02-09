@@ -61,7 +61,7 @@ const ModelUploadForm = () => {
                     <Stack p={2} spacing={1}>
                         <label htmlFor="file-upload">
                             <VisuallyHiddenInput id="file-upload" type="file" onChange={handleFileChange} />
-                            <Fab component="span" variant="extended" aria-label="upload">
+                            <Fab component="span" variant="extended" aria-label="upload" className="bg-transparent">
                                 <CloudUploadIcon />
                             </Fab>
                         </label>
